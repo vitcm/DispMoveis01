@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import xml2js from "react-native-xml2js";
 import {
   Container,
   DataInsertion,
@@ -17,6 +18,7 @@ export function Tela() {
   const [sortOrder, setSortOrder] = useState<"default" | "asc" | "desc">(
     "default"
   );
+  const [xmlData, setXmlData] = useState("");
 
   const handleButtonPress = () => {
     if (text.trim() !== "" && data.length < 4) {
@@ -28,6 +30,22 @@ export function Tela() {
   const handleButtonDelete = () => {
     setData([]);
     setSortOrder("default");
+    setXmlData("");
+  };
+
+  const handleTextChange = (text: string) => {
+    setText(text);
+  };
+
+  const handleSortOrderChange = (order: "default" | "asc" | "desc") => {
+    setSortOrder(order);
+    setXmlData("");
+  };
+
+  const generateXml = () => {
+    const builder = new xml2js.Builder();
+    const xml = builder.buildObject({ data });
+    setXmlData(xml);
   };
 
   const sortedData = [...data];
@@ -37,14 +55,6 @@ export function Tela() {
   } else if (sortOrder === "desc") {
     sortedData.sort((a, b) => b.localeCompare(a));
   }
-
-  const handleTextChange = (text: string) => {
-    setText(text);
-  };
-
-  const handleSortOrderChange = (order: "default" | "asc" | "desc") => {
-    setSortOrder(order);
-  };
 
   return (
     <Container>
@@ -71,6 +81,8 @@ export function Tela() {
           onClick={handleButtonDelete}
           title="Clique aqui para apagar dados"
         />
+        <Button onClick={generateXml} title="Gerar XML" />
+        {xmlData && <TextOrder>XMsL Gerado: {xmlData}</TextOrder>}
       </DataShow>
     </Container>
   );
