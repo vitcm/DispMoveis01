@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { Input } from "./src/Input";
+import { Button } from "./src/Button";
+import { Tela } from "./src/Tela";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <Tela />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   mainContainer: {
+//     flex: 1,
+//     backgroundColor: "#3E2A35",
+//     border
+//   },
+//   secondContainer: {
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
